@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>All About She</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+
+body{
+background:linear-gradient(180deg,#0f0f1a,#1b1b2f);
+color:#fff;
+overflow:hidden;
+}
+
+section{
+width:100%;
+min-height:100vh;
+display:none;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+animation:fade 1s ease;
+}
+
+section.active{display:flex}
+
+h1{margin:20px 0}
+
+button{
+padding:8px 18px;
+border:none;
+border-radius:20px;
+background:#ff8fab;
+font-size:.85em;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{transform:scale(1.08)}
+
+.scroll{
+max-height:70vh;
+overflow-y:auto;
+padding:10px;
+}
+
+.gallery{
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.gallery img{
+width:200px;
+height:280px;
+object-fit:cover;
+border-radius:20px;
+}
+
+.bio-box{
+margin-top:12px;
+padding:16px;
+background:rgba(255,255,255,.12);
+border-radius:14px;
+max-width:340px;
+font-size:.9em;
+line-height:1.6;
+}
+
+.bio-line{
+opacity:0;
+animation:fadeIn .5s forwards;
+margin-bottom:6px;
+}
+
+footer{
+margin:25px 0 10px;
+opacity:.6;
+font-size:.8em;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:none}
+}
+
+@keyframes fadeIn{
+to{opacity:1}
+}
+
+.sakura{
+position:fixed;
+top:-20px;
+font-size:16px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+to{transform:translateY(120vh) rotate(360deg)}
+}
+</style>
+</head>
+
+<body>
+
+<audio src="scus.mp3" autoplay loop></audio>
+
+<section id="landing" class="active">
+<h1>All About She</h1>
+<button onclick="go('gallery')">Are You Ready?</button>
+</section>
+
+<section id="gallery">
+<h1>Her Moments</h1>
+<div class="scroll">
+<div class="gallery">
+<img src="a1.png">
+<img src="a2.png">
+<img src="a3.png">
+<img src="a4.png">
+<img src="a5.png">
+</div>
+</div>
+<button onclick="go('bio')">Bio?</button>
+</section>
+
+<section id="bio">
+<h1>About Her</h1>
+
+<div class="scroll">
+<div id="bioBox" class="bio-box"></div>
+</div>
+
+<button onclick="startBio()" style="margin-top:12px">Show Bio</button>
+<button onclick="go('end')" style="margin-top:10px">Final</button>
+</section>
+
+<section id="end">
+<h1>Final Note</h1>
+<p style="max-width:300px;text-align:center">
+This page doesn’t explain her.<br>
+It only proves one thing.<br>
+She stayed.<br>
+And somehow, she mattered more than she knows.
+</p>
+<footer>© Alifa × Anonymous, 2025. End.</footer>
+</section>
+
+<script>
+const bioLines=[
+"Full Name: Alifa Revalina Rohima",
+"Nicknames: Alifa, Liv, Lipa",
+"Date of Birth: January 7, 2013",
+"Zodiac: Capricorn",
+"Religion: Islam",
+"Height: Creator hasn’t checked yet",
+"Hobby: Making other people’s sons cry",
+"Favorite Color: Pink",
+"Favorite Food: Seblak",
+"Favorite Drink: Iced Tea",
+"She Loves: Novels, treating boys, smacking boys",
+"She Hates: Being betrayed",
+"Dominant Trait: Stubborn",
+"Laugh: Like a red kuntilanak",
+"Angry When: Her father’s name is teased",
+"Happiest When: Late-night calls",
+"Words She Often Says: Ihh, Imup",
+"First Memory: A red ghost landed on Earth",
+"The Simplest Thing That Makes Her Special: She is different",
+"Formal Education:",
+"SD: SDN Kragilan 2",
+"SMP: SMPN 1 Kragilan",
+"Instagram: faaa0704",
+"TikTok: syaaaalucuuu"
+]
+
+let bioIndex=0
+const box=document.getElementById('bioBox')
+
+function startBio(){
+box.innerHTML=''
+bioIndex=0
+spawnLine()
+}
+
+function spawnLine(){
+if(bioIndex>=bioLines.length) return
+const p=document.createElement('div')
+p.className='bio-line'
+p.innerText=bioLines[bioIndex]
+box.appendChild(p)
+bioIndex++
+setTimeout(spawnLine,1000)
+}
+
+function go(id){
+document.querySelectorAll('section').forEach(s=>s.classList.remove('active'))
+document.getElementById(id).classList.add('active')
+}
+
+/* sakura rain */
+setInterval(()=>{
+for(let i=0;i<4;i++){
+const s=document.createElement('div')
+s.className='sakura'
+s.innerText='🌸'
+s.style.left=Math.random()*innerWidth+'px'
+s.style.animationDuration=3+Math.random()*4+'s'
+document.body.appendChild(s)
+setTimeout(()=>s.remove(),8000)
+}
+},150)
+</script>
+
+</body>
+</html>
